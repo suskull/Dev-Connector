@@ -1,0 +1,5 @@
+{
+    "mongoURI": "mongodb+srv://admin:ildiavolo4@cluster0.i3mhj.mongodb.net/test?retryWrites=true",
+    "jwtSecret": "secretjasonwebtoken"
+    
+}
