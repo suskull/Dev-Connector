@@ -28,7 +28,7 @@ router.post(
            //Check email exists
            let user = await User.findOne({email})
            if(user) {
-               res.status(400).json({errors: [{msg : 'User already exists'}]})
+               return res.status(400).json({errors: [{msg : 'User already exists'}]})
            }
 
            //Get Users gravatar
@@ -63,11 +63,31 @@ router.post(
 
            await user.save();
 
-        res.send('User registered')
+        res.status(201).send('User registered')
        } catch(e) {
            console.log(e.message)
            res.status(500).send('Server error')
        }
       
+})
+
+router.get('/all', async (req,res) => {
+    try {
+        const user = await User.find()
+        res.send(user)
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send('Server error')
+    }
+})
+
+router.get('/:id', async (req,res) => {
+    try {
+        const user = await User.findById(req.params.id)
+        res.send(user)
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send('Server error')
+    }
 })
 module.exports = router;
