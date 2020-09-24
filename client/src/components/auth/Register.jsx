@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios'
-const Register = () => {
+import {connect} from 'react-redux'
+import {setAlert} from '../../actions/alert'
+import register from '../../actions/auth'
+const Register = (props) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,8 +21,13 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      return alert("password does not match");
+      return props.setAlert("password does not match", "danger");
     }
+
+
+    props.register({name,email,password})
+
+
 
     // const newUser = {
     //     name,
@@ -42,6 +49,8 @@ const Register = () => {
     // }
 
   };
+
+  console.log(props.auth)
   return (
     <>
       <h1 className="large text-primary">Sign Up</h1>
@@ -74,10 +83,7 @@ const Register = () => {
             value={email}
             onChange={(e) => onChange(e)}
           />
-          <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
+     
         </div>
         <div className="form-group">
           <input
@@ -108,4 +114,8 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, {setAlert,register})(Register);

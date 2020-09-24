@@ -5,7 +5,7 @@ const initialState = [
 ]
 
 
-export default alertReducer = (state=initialState, action) => {
+export default function (state=initialState, action) {
     switch(action.type) {
         case 'SET_ALERT': {
             return [
