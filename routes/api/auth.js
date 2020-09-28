@@ -41,7 +41,7 @@ router.post('/', async (req,res) => {
             }
         }
 
-         jwt.sign(payload, config.get('jwtSecret'), {expiresIn: 360000}, (error, token) => {
+         jwt.sign(payload, config.get('jwtSecret'), {expiresIn: 100}, (error, token) => {
             if(error) res.send(error);
             res.status(200).send({user,token})
         })

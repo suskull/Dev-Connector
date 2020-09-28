@@ -11,11 +11,12 @@ import store from "./store";
 import Alert from "./components/layout/Alert.jsx";
 import { getAuthUser } from "./actions/auth";
 import PrivateRoute from "./routing/PrivateRoute";
+import CreateProfile from "./components/profile-forms/CreateProfile";
 function App() {
   useEffect(() => {
     store.dispatch(getAuthUser())
   }, [])
-  const [url, setURL] = useState('/login')
+  const loginUrl = '/login'
   return (
     <Provider store={store}>
       <Router>
@@ -27,7 +28,9 @@ function App() {
           <Switch>
             <Route exact path="/register" component={Register} />
             <Route exact path="/Login" component={Login} />
-           <PrivateRoute exact path='/dashboard' component={DashBoard} url={url}/>
+           <PrivateRoute exact path='/dashboard' component={DashBoard} />
+           <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+
           </Switch>
         </section>
       </>

@@ -10,3 +10,6 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 
 export const LOG_OUT = 'LOG_OUT'
+
+export const GET_PROFILE = 'GET_PROFILE'
+export const GET_PROFILE_FAILURE = 'GET_PROFILE_FAILURE'

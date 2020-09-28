@@ -68,17 +68,37 @@ const { remove } = require("../../models/Profile");
 // });
 
 //create profile
-router.post("/", auth, async (req, res) => {
+router.post("/", 
+[
+  auth, 
+  [
+    check('status', 'Status is required').not().isEmpty(),
+    check('skills', 'Skills is required').not().isEmpty()
+  ]
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   try {
     // const profileFields = {}
     // profileFields.user = req.user.id;
 
     let profile = await Profile.findOne({ user: req.user.id });
+    
+    const {skills} = req.body
+    const profileField  = {
+      ...req.body,
+      skills: Array.isArray(skills)
+      ? skills
+      : skills.split(',').map((skill) => '' + skill.trim()),
+      user: req.user.id
+    }
     //check exist and update
     if (profile) {
       profile = await Profile.findOneAndUpdate(
         { user: req.user.id },
-        { $set: { ...req.body, user: req.user.id } },
+        { $set: profileField },
         {
           new: true,
           useFindAndModify: false,
@@ -105,7 +125,7 @@ router.get("/me", auth, async (req, res) => {
       user: req.user.id,
     }).populate("user", ["name", "avatar"]);
     if (!profile) {
-      return res.send({ error: "There are no profile" });
+      return res.status(404).send({ msg: "There are no profile" });
     }
     res.send(profile);
   } catch (e) {

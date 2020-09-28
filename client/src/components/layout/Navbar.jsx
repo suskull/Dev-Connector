@@ -7,9 +7,15 @@ const Navbar = (props) => {
     return (
       <ul>
         <li>
+            <Link to="dashboard">
+            <i className="fas fa-user"></i>{''}
+            <span className='hide-sm'>  Dashboard</span>
+              </Link>
+          </li>
+        <li>
           <a href='/' onClick={() => props.logout()}>
             <i className="fas fa-sign-out-alt"></i>
-            <span>  Logout</span>
+            <span className='hide-sm'>  Logout</span>
           </a>
         </li>
       </ul>

@@ -4,12 +4,11 @@ const config = require('config');
 
  const auth =  async (req, res, next) => {
     
-    const token = req.header('Authorization').replace('Bearer ', '')
-    console.log(token)
+    const token = req.header('Authorization') && req.header('Authorization').replace('Bearer ', '')
 
 
     if(!token) {
-        return res.status(401).json({error: 'No token, authoziration failed'})
+        return res.status(401).json({msg: 'No token, authoziration failed'})
     }
     try {
        
@@ -22,7 +21,7 @@ const config = require('config');
         // if (!user) {                                          
         //     throw new Error()
         // }
-        console.log(decoded)
+        console.log('haha',decoded)
         req.user = decoded.user
       
         next()
