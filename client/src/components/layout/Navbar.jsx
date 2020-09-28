@@ -42,7 +42,7 @@ const Navbar = (props) => {
       <nav className="navbar bg-dark">
         <h1>
           <Link to="/">
-            <i class="fas fa-code"></i>
+            <i className="fas fa-code"></i>
           </Link>
         </h1>
         {props.isAuthenticated ? authNavbar() : guestNavbar()}

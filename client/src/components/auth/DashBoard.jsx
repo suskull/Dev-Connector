@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getLoginedUserProfile} from '../../actions/profile'
 import Spinner from '../layout/Spinner.jsx'
+import DashBoardAction from '../dashboard/DashBoardAction'
 const DashBoard = ({getLoginedUserProfile, auth : {user}, profile}) => {
 
      useEffect(() => {
@@ -11,7 +12,6 @@ const DashBoard = ({getLoginedUserProfile, auth : {user}, profile}) => {
 
         
 
-    console.log(profile)
 
     return (
         <>
@@ -27,7 +27,9 @@ const DashBoard = ({getLoginedUserProfile, auth : {user}, profile}) => {
                             <p>You have not yet setup a profile, please add some info</p>
                             <Link to='/create-profile' className='btn btn-primary my-1'>Create Profile</Link>
                         </> 
-                        : <>has </>
+                        : <>
+                            <DashBoardAction />
+                         </>
                     }
                 </>
                 

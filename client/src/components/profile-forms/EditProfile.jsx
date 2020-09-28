@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { createUserProfile } from "../../actions/profile";
-const CreateProfile = ({ createUserProfile, history, profile }) => {
+import { createUserProfile, getLoginedUserProfile } from "../../actions/profile";
+const EditProfile = ({ createUserProfile, history, profile: {profile}, getLoginedUserProfile }) => {
   const [formData, setFormData] = useState({
     company: "",
     website: "",
@@ -17,6 +17,21 @@ const CreateProfile = ({ createUserProfile, history, profile }) => {
     youtube: "",
     instagram: "",
   });
+  const [displaySocialInputs, toggleSocialInputs] = useState(false)
+
+
+  useEffect(() => {
+    getLoginedUserProfile();
+    setFormData({
+      ...profile,
+      twitter: profile.social.twitter,
+      facebook: profile.social.facebook,
+      linkedin: profile.social.linkedin,
+      youtube: profile.social.youtube,
+      instagram: profile.social.instagram
+    })
+  }, [])
+
 
   const {
     company,
@@ -32,9 +47,9 @@ const CreateProfile = ({ createUserProfile, history, profile }) => {
     youtube,
     instagram,
   } = formData;
-
-
   
+
+  console.log(formData)
   const onChange = (e) =>
     setFormData(
       { ...formData, 
@@ -45,13 +60,14 @@ const CreateProfile = ({ createUserProfile, history, profile }) => {
       }
     );
 
-  console.log("hahaha", formData);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
 
-    createUserProfile(formData, history, profile?.profile ? true : false);
+    createUserProfile(formData, history, profile ? true : false);
   };
+
+  console.log(!profile)
   return (
     <>
       <h1 className="large text-primary">Create Your Profile</h1>
@@ -149,13 +165,15 @@ const CreateProfile = ({ createUserProfile, history, profile }) => {
         </div>
 
         <div className="my-2">
-          <button type="button" className="btn btn-light">
+          <button type="button" className="btn btn-light" onClick= {() => toggleSocialInputs(!displaySocialInputs)}>
             Add Social Network Links
           </button>
           <span>Optional</span>
         </div>
-
-        <div className="form-group social-input">
+        {
+          displaySocialInputs 
+          ?<> 
+            <div className="form-group social-input">
           <i className="fab fa-twitter fa-2x"></i>
           <input
             type="text"
@@ -209,6 +227,10 @@ const CreateProfile = ({ createUserProfile, history, profile }) => {
             onChange={(e) => onChange(e)}
           />
         </div>
+          </> 
+          :null 
+        }
+        
         <input type="submit" className="btn btn-primary my-1" />
         <a className="btn btn-light my-1" href="dashboard.html">
           Go Back
@@ -221,6 +243,6 @@ const CreateProfile = ({ createUserProfile, history, profile }) => {
 const mapStateToProps = (state) => ({
   profile: state.profile,
 });
-export default connect(mapStateToProps, { createUserProfile})(
-  withRouter(CreateProfile)
+export default connect(mapStateToProps, { createUserProfile, getLoginedUserProfile })(
+  withRouter(EditProfile)
 );
