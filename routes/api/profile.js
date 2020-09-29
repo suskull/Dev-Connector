@@ -3,6 +3,7 @@ const { check, validationResult } = require("express-validator");
 const request = require("request");
 const config = require("config");
 const Profile = require("../../models/Profile");
+const Post = require("../../models/Post");
 const router = express.Router();
 const auth = require("../../middleware/auth");
 const User = require("../../models/User");
@@ -86,14 +87,19 @@ router.post("/",
 
     let profile = await Profile.findOne({ user: req.user.id });
     
-    const {skills} = req.body
+    const {skills, twitter, facebook, youtube, linkedin, instagram} = req.body
+
     const profileField  = {
       ...req.body,
       skills: Array.isArray(skills)
       ? skills
       : skills.split(',').map((skill) => '' + skill.trim()),
+      social: {
+        twitter, facebook, youtube, linkedin, instagram
+      },
       user: req.user.id
     }
+    
     //check exist and update
     if (profile) {
       profile = await Profile.findOneAndUpdate(
@@ -108,7 +114,7 @@ router.post("/",
     }
 
     //create new
-    profile = new Profile({ ...req.body, user: req.user.id });
+    profile = new Profile({ ...profileField, user: req.user.id });
 
     await profile.save();
     res.send(profile);
@@ -137,8 +143,8 @@ router.get("/me", auth, async (req, res) => {
 //get all profile
 router.get("/all", async (req, res) => {
   try {
-    const profile = await Profile.find().populate("user", ["name", "avatar"]);
-    res.send(profile);
+    const profiles = await Profile.find().populate("user", ["name", "avatar"]);
+    res.send(profiles);
   } catch (e) {
     console.log(e.message);
     res.status(500).send("Get failed");
@@ -169,6 +175,7 @@ router.get("/user/:userId", async (req, res) => {
 
 router.delete("/", auth, async (req, res) => {
   try {
+    await Post.deleteMany({user: req.user.id})
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
     res.send({ message: "Deleted success" });
@@ -207,7 +214,7 @@ router.delete("/education/:eduId", auth, async (req, res) => {
 
     profile.education.splice(removeIndex, 1);
     await profile.save();
-    res.send({ msg: "Delete sucess", profile });
+    res.send({ msg: "Delete success", profile });
   } catch (error) {
     console.log(error.message);
     res.send("Delete failed");

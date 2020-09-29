@@ -6,6 +6,9 @@ const Navbar = (props) => {
   const authNavbar = () => {
     return (
       <ul>
+          <li>
+            <Link to="profiles">Developers</Link>
+          </li>
         <li>
             <Link to="dashboard">
             <i className="fas fa-user"></i>{''}
