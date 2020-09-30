@@ -7,7 +7,7 @@ const Education = ({education,deleteEducation}) => {
     const educations = education?.map(e => {
         return (
             <>
-                <tr key={e.id}>
+                <tr key={e._id}>
                     <td>{e.school}</td>
                     <td className="hide-sm">{e.degree}</td>
                     <td><Moment format='YYYY/MM/DD'>{e.from}</Moment> - {

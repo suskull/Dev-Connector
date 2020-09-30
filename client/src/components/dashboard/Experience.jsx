@@ -3,12 +3,12 @@ import Moment from 'react-moment';
 import {connect} from 'react-redux'
 import {deleteExperience} from '../../actions/profile'
 const Experience = ({experience, deleteExperience}) => {
-
+    console.log(experience)
     const experiences = experience?.map(e => {
-
+        
         return (
             <>
-                <tr key={e.id}>
+                <tr key={e._id}>
                     <td>{e.company}</td>
                     <td className="hide-sm">{e.title}</td>
                     <td><Moment format='YYYY/MM/DD'>{e.from}</Moment> - {
