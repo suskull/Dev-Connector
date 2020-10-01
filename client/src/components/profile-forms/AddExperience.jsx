@@ -38,7 +38,6 @@ const AddExperience = ({profile : {profile}, addExperience, history, setAlert })
     addExperience(formData, history, profile?.experience.length > 0 ? true : false )
   }
 
-  console.log(formData);
   return (
     <>
       <h1 class="large text-primary">Add An Experience</h1>

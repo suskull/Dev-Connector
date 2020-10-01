@@ -41,7 +41,6 @@ const AddEducation = ({profile : {profile}, addEducation, history, setAlert }) =
 
   }
 
-  console.log(formData);
   return (
     <>
       <h1 class="large text-primary">Add An Education</h1>

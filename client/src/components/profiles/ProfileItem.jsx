@@ -8,14 +8,14 @@ const ProfileItem = ({ profile, getProfileById }) => {
       <div className="profile bg-light" key={profile._id}>
         <img
           className="round-img"
-          src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+          src={profile?.user?.avatar}
           alt=""
         />
         <div>
           <h2>{profile.user.name}</h2>
           <p>{profile.bio}</p>
           <p>{profile.location}</p>
-          <Link to="profile" className="btn btn-primary" onClick={() => getProfileById(profile.user._id) }>
+          <Link to={`profile/${profile.user._id}`} className="btn btn-primary"  >
             View Profile
           </Link>
         </div>

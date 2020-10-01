@@ -7,7 +7,7 @@ import {
   GET_PROFILES,
   GET_PROFILES_FAILURE,
   GET_PROFILE_BY_ID,
-  GET_PROFILE_BY_ID_FAILURE
+  GET_PROFILE_BY_ID_FAILURE, GET_REPOS, GET_REPOS_FAILURE
 } from "../actions/types";
 
 const initialState = {
@@ -30,8 +30,9 @@ export default function (state = initialState, action) {
       };
     case UPDATE_PROFILE_FAILURE:
     case GET_PROFILE_FAILURE:
-    case CLEAR_PROFILE:
+    
     case GET_PROFILE_BY_ID_FAILURE:
+    
       return {
         ...state,
         isLoading: false,
@@ -51,6 +52,24 @@ export default function (state = initialState, action) {
         isLoading: false,
         error: action.payload,
       };
+    case GET_REPOS :
+      return {
+        ...state,
+        repos: action.payload,
+        isLoading: false
+      }
+    case GET_REPOS_FAILURE: 
+      return {
+        ...state,
+        repos: [],
+        isLoading: false
+      }
+      case CLEAR_PROFILE:
+        return {
+          ...state,
+          repos: [],
+          profile: null,
+        }
     default:
       return state;
   }

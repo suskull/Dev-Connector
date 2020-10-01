@@ -3,7 +3,6 @@ import Moment from 'react-moment';
 import {connect} from 'react-redux'
 import {deleteExperience} from '../../actions/profile'
 const Experience = ({experience, deleteExperience}) => {
-    console.log(experience)
     const experiences = experience?.map(e => {
         
         return (

@@ -6,10 +6,10 @@ import ProfileItem from "./ProfileItem";
 
 const Profiles = ({ profiles, getProfiles, isLoading }) => {
   useEffect(() => {
-    //   setTimeout(() => {
-    //     getProfiles();
-    //   }, 2000);
-    getProfiles();
+      setTimeout(() => {
+        getProfiles();
+      }, 500);
+    // getProfiles();
   }, []);
 
   console.log("hahaha", profiles);

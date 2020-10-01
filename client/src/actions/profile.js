@@ -9,7 +9,7 @@ import {
   GET_PROFILES,
   GET_PROFILES_FAILURE,
   GET_PROFILE_BY_ID,
-  GET_PROFILE_BY_ID_FAILURE
+  GET_PROFILE_BY_ID_FAILURE, GET_REPOS_FAILURE, GET_REPOS
 } from "./types";
 import { setAlert } from "../actions/alert";
 
@@ -226,6 +226,9 @@ export const deleteAccount = () => async (dispatch) => {
 };
 
 export const getProfiles = () => async (dispatch) => {
+    dispatch({
+      type:CLEAR_PROFILE
+    })
   try {
     const res = await axios.get("/api/profile/all");
     dispatch({
@@ -273,3 +276,29 @@ export const getProfileById = (id) => async dispatch => {
     });
   }
 };
+
+
+export const getRepos = username => async dispatch => {
+
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`)
+
+    dispatch({
+      type: GET_REPOS,
+      payload: res.data
+    })
+  } catch (error) {
+    const errors = error?.response?.data?.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+    }
+    dispatch({
+      type: GET_REPOS_FAILURE,
+      payload: {
+        msg: error?.response?.statusText,
+        status: error?.response?.status,
+      },
+    });
+  }
+}

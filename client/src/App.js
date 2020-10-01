@@ -34,7 +34,7 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/Login" component={Login} />
             <Route exact path='/profiles' component={Profiles} />
-            <Route exact path='/profile/:id' component={Profile} />
+            <Route  path='/profile/:id' component={Profile} />
 
            <PrivateRoute exact path='/dashboard' component={DashBoard} />
            <PrivateRoute exact path='/create-profile' component={CreateProfile} />

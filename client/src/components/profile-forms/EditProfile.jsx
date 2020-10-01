@@ -58,7 +58,6 @@ const EditProfile = ({
     instagram,
   } = formData;
 
-  console.log(formData);
   const onChange = (e) =>
     setFormData({
       ...formData,
@@ -74,7 +73,6 @@ const EditProfile = ({
     createUserProfile(formData, history, profile ? true : false);
   };
 
-  console.log(!profile);
 
   return (
     <>

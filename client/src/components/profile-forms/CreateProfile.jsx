@@ -45,8 +45,6 @@ const CreateProfile = ({ createUserProfile, history, profile }) => {
       }
     );
 
-  console.log("hahaha", formData);
-
   const onFormSubmit = (e) => {
     e.preventDefault();
 

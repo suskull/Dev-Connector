@@ -14,7 +14,6 @@ const DashBoard = ({getLoginedUserProfile, auth : {user}, profile,deleteAccount}
 
         
 
-    console.log(profile.profile)
     return (
         <>
             {profile?.isLoading ? <Spinner /> 
