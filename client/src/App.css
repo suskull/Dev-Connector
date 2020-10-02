@@ -187,7 +187,7 @@ img {
 .alert-danger {
   background: var(--danger-color);
   color: #fff;
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
 }
 .alert-delete-button {

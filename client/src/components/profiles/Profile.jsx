@@ -9,6 +9,7 @@ import ProfileAbout from "../profiles/ProfileAbout";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
 import ProfileRepos from "./ProfileRepos";
+import { Skeleton } from '@material-ui/lab'
 const Profile = ({
   profile: { profile, isLoading },
   match,
@@ -26,7 +27,17 @@ const Profile = ({
   return (
     <>
       {!profile ? (
-        <Spinner />
+        <>
+          <Skeleton variant="rect" height={40} width={160} animation="wave"/>
+          <div className="profile-grid my-1">
+            <div className="profile-top bg-primary p-2" style={{backgroundColor: "#f6f6f6"}}>
+              <Skeleton variant="rect" height={450} animation="wave"/>
+            </div>
+          <Skeleton variant="rect" height={250} style={{backgroundColor: "#f4f4f4", border:"none"}} className="profile-about bg-light p-2" animation="wave" />
+          <Skeleton variant="rect" height={250} style={{backgroundColor: "#f4f4f4", border:"none"}} className="profile-exp bg-white p-2" animation="wave"/>
+          <Skeleton variant="rect" height={250} style={{backgroundColor: "#f4f4f4", border:"none"}} className="profile-edu bg-light p-2" animation="wave"/>
+          </div>
+        </>
       ) : (
         <>
           <Link to="/profiles" className="btn btn-light">
@@ -52,6 +63,7 @@ const Profile = ({
     </>
   );
 };
+
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
