@@ -1,0 +1,8 @@
+{
+    "mongoURI": "mongodb+srv://admin:ildiavolo4@cluster0.i3mhj.mongodb.net/test?retryWrites=true",
+    "jwtSecret": "secretjasonwebtoken",
+    "githubClientId": "788bbd8f34721675a28a",
+    "githubClientSecret": "070e3af8b98bc0c4b39b2f328498a27384c708c3"
+
+    
+}
