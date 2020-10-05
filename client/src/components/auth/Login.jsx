@@ -37,8 +37,7 @@ const Login = (props) => {
         action="create-profile.html"
         onSubmit={(e) => onSubmit(e)}
       >
-        {email}
-        {password}
+      
         <div className="form-group">
           <input
             type="email"
@@ -61,7 +60,7 @@ const Login = (props) => {
         <input type="submit" className="btn btn-primary" value="Login" />
       </form>
       <p className="my-1">
-        Don't have an account? <Link to="/login">Sign Up</Link>
+        Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
     </>
   );

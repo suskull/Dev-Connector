@@ -76,9 +76,7 @@ const Register = (props) => {
             onChange={(e) => onChange(e)}
           />
         </div>
-        {name}
-        {email}
-        {password}
+      
         <div className="form-group">
           <input
             type="email"

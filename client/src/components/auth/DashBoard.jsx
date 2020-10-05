@@ -16,7 +16,7 @@ const DashBoard = ({getLoginedUserProfile, auth : {user}, profile,deleteAccount}
 
     return (
         <>
-            {profile?.isLoading ? <Spinner /> 
+            {profile?.profile === null ? <Spinner /> 
                 :<>
                     <h1 className="large text-primary">Dashboard</h1>
                     <p className="lead">
