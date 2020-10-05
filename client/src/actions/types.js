@@ -42,3 +42,5 @@ export const CLEAR_POST = 'CLEAR_POST'
 export const ADD_COMMENT = 'ADD_COMMENT'
 
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const LOADING_TRUE = 'LOADING_TRUE'
+export const CLEAR_PROFILES = 'CLEAR_PROFILES'

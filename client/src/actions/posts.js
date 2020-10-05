@@ -83,6 +83,8 @@ export const addPost = formData => async dispatch => {
             type: ADD_POST,
             payload: res.data
         })
+
+        dispatch(setAlert('Post create success', 'success'))
     } catch (error) {
         dispatch({
             type: GET_POSTS_FAILURE,

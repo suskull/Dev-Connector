@@ -10,13 +10,13 @@ const Profiles = ({ profiles, getProfiles, isLoading }) => {
         getProfiles();
       }, 500);
     // getProfiles();
-  }, []);
+  }, [profiles]);
 
   console.log("hahaha", profiles);
 
   return (
     <>
-      {isLoading ? (
+      {profiles.length === 0 ? (
         <Spinner />
       ) : (
         <>

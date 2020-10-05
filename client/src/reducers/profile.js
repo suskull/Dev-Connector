@@ -7,7 +7,8 @@ import {
   GET_PROFILES,
   GET_PROFILES_FAILURE,
   GET_PROFILE_BY_ID,
-  GET_PROFILE_BY_ID_FAILURE, GET_REPOS, GET_REPOS_FAILURE
+  GET_PROFILE_BY_ID_FAILURE, GET_REPOS, GET_REPOS_FAILURE, LOADING_TRUE,
+  CLEAR_PROFILES
 } from "../actions/types";
 
 const initialState = {
@@ -70,6 +71,17 @@ export default function (state = initialState, action) {
           repos: [],
           profile: null,
         }
+      case LOADING_TRUE: 
+      return {
+        ...state,
+        isLoading: true
+      }
+      case CLEAR_PROFILES: {
+        return {
+          ...state,
+          profiles: []
+        }
+      }
     default:
       return state;
   }

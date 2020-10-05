@@ -9,11 +9,15 @@ import {
   GET_PROFILES,
   GET_PROFILES_FAILURE,
   GET_PROFILE_BY_ID,
-  GET_PROFILE_BY_ID_FAILURE, GET_REPOS_FAILURE, GET_REPOS
+  GET_PROFILE_BY_ID_FAILURE, GET_REPOS_FAILURE, GET_REPOS, LOADING_TRUE,CLEAR_PROFILES
 } from "./types";
 import { setAlert } from "../actions/alert";
 
 export const getLoginedUserProfile = () => async (dispatch) => {
+
+  dispatch({
+    type: CLEAR_PROFILES
+  })
   try {
     const res = await axios.get("/api/profile/me");
 
@@ -37,6 +41,10 @@ export const getLoginedUserProfile = () => async (dispatch) => {
 export const createUserProfile = (formData, history, edit = false) => async (
   dispatch
 ) => {
+
+  dispatch({
+    type: LOADING_TRUE
+  })
   try {
     const config = {
       headers: {
