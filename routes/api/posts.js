@@ -20,20 +20,19 @@ router.post("/", [auth, [
     try {
         const user = await User.findById(req.user.id).select('-password')
 
-        let newPost = await Post.findOne({text: req.body.text})
-        if(newPost) {
+        let post = await Post.findOne({text: req.body.text})
+        if(post) {
            return  res.status(400).json({errors: [{msg : 'Post title already exists'}]})
         }
 
-         newPost = new Post({
+         post = new Post({
             text: req.body.text,
             name: user.name,
             avatar: user.avatar,
             user: req.user.id
         })
-
-        await newPost.save()
-        res.send(newPost)
+        await post.save()
+        res.send(post)
     } catch (error) {
         console.log(error.message);
         res.status(500).send('Server error')

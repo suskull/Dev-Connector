@@ -8,7 +8,7 @@ import {
   GET_PROFILES_FAILURE,
   GET_PROFILE_BY_ID,
   GET_PROFILE_BY_ID_FAILURE, GET_REPOS, GET_REPOS_FAILURE, LOADING_TRUE,
-  CLEAR_PROFILES
+  CLEAR_PROFILES,LOG_OUT,DELETE_ACCOUNT
 } from "../actions/types";
 
 const initialState = {
@@ -82,6 +82,14 @@ export default function (state = initialState, action) {
           profiles: []
         }
       }
+      case LOG_OUT:
+      case DELETE_ACCOUNT:
+        localStorage.removeItem('token')
+            return {
+                ...state,
+                profile:null,
+                isLoading:true,
+            }
     default:
       return state;
   }

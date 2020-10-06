@@ -76,7 +76,7 @@ export default function (state=initialState, action) {
                 ...state,
                 user:null,
                 isAuthenticated: false,
-                isLoading:false
+                isLoading:true,
             }
         default:
             return state

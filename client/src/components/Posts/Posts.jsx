@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -7,12 +8,11 @@ import Spinner from "../layout/Spinner";
 import AddPost from "./AddPost";
 import PostItem from "./PostItem";
 const Posts = ({ getPosts, posts: { posts, isLoading } }) => {
+  const [loading, setLoading] = useState(isLoading)
   useEffect(() => {
-      setTimeout(() => {
     getPosts();
-
-      }, 500)
-  }, []);
+  }, [posts.length]);
+  
   return (
     <>
       {isLoading ? (

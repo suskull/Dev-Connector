@@ -6,11 +6,9 @@ import ProfileItem from "./ProfileItem";
 
 const Profiles = ({ profiles, getProfiles, isLoading }) => {
   useEffect(() => {
-      setTimeout(() => {
         getProfiles();
-      }, 500);
     // getProfiles();
-  }, [profiles]);
+  }, [profiles.length]);
 
   console.log("hahaha", profiles);
 
